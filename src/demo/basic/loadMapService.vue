@@ -16,7 +16,7 @@
 
 <script>
 
-
+  import BaiDuImageryProvider from './js/BaiDuImageryProvider'
   import  Vcesium from '../../components/cesiumViewer'
     export default {
         name: "loadMapService",
@@ -140,9 +140,9 @@
            })
             break
           case "bmap":
-           layer=new Cesium.UrlTemplateImageryProvider({
-             url : 'https://ss1.bdstatic.com/8bo_dTSlR1gBo1vgoIiO_jowehsv/pvd/?qt=vtile&x={x}&y={y}&z={z}&styles=pl&udt=20180810&scaler=1&showtext=1'
-           })
+            layer=new BaiDuImageryProvider({
+              layer:"vec"
+            });
             break
 
 
@@ -155,7 +155,7 @@
 
         },
         otherOperations(){
-          this.loadFeature("MAPBOX")
+          this.loadFeature("bmap")
         },
         modeTypeChange(v){
             this.loadFeature(v)

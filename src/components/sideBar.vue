@@ -25,7 +25,8 @@
       }
     },
     mounted(){
-      this.$router.push("/basic/hello");
+      console.log(this.$router)
+     // this.$router.push("/basic/hello");
     },
     data() {
       return {
@@ -51,14 +52,22 @@
             {title:"修改primitive中外观",index:"/basic/primitiveManagerApp"},
             {title:"提示框",index:"/basic/tooltip"},
             {title:"提示框DIV形式",index:"/basic/tooltipDiv"},
-            {title:"在线绘制图形",index:"/basic/draw"},
-            ]
+
+            {title:"挖地形",index:"/basic/planeGround"},
+            {title:"图层参数调整",index:"/basic/layerParams"},
+            {title:"相机视角",index:"/basic/cameraView"},
+        ]
         },{
           index:"medium",
           title:"中级工具篇",
           className:"el-icon-camera-solid",//图标样式
           content:[
             {title:"在线绘制图形",index:"/medium/drawOnline"},
+            {title:"切分地图",index:"/medium/divideMap"},
+            {title:"clock/光照控制",index:"/medium/clock"},
+            {title:"模型根据距离条件显隐",index:"/medium/loadCtrbyDis"},
+            {title:"模型阴影",index:"/medium/shadow"},
+            {title:"czml加载模型",index:"/medium/czml"},
             {title:"可视域分析",index:"ksh"}]
         },{
           index:"advance",

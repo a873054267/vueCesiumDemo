@@ -54,8 +54,9 @@
           });
           this.worldTerrain=worldTerrain
           var ellipsoidProvider = new Cesium.EllipsoidTerrainProvider();
+
           this.ellipsoidProvider=ellipsoidProvider
-          viewer.terrainProvider=ellipsoidProvider
+          viewer.terrainProvider=worldTerrain
         },
 
         modeTypeChange(v){

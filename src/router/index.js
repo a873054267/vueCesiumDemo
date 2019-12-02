@@ -16,6 +16,11 @@ export default new Router({
       component: resolve => require(['../demo/basic/hello.vue'], resolve), //Home
     },
     {
+      path:"/basic/planeGround",
+      name:"/basic//planeGround",
+      component: resolve => require(['../demo/basic//planeGround.vue'], resolve), //Home
+    },
+    {
       path:"/basic/load3DModel",
       name:"/basic/load3DModel",
       component: resolve => require(['../demo/basic/load3Dmodel.vue'], resolve), //Home
@@ -39,6 +44,11 @@ export default new Router({
       path:"/basic/baseLayerPick",
       name:"/basic/baseLayerPick",
       component: resolve => require(['../demo/basic/baseLayerPick'], resolve), //Home
+    },
+    {
+      path:"/basic/cameraView",
+      name:"/basic/cameraView",
+      component: resolve => require(['../demo/basic/cameraView'], resolve), //Home
     },
     {
       path:"/basic/replaceBaseLayerPick",
@@ -89,6 +99,11 @@ export default new Router({
       component: resolve => require(['../demo/basic/tooltipDiv'], resolve), //Home
     },
     {
+      path:"/basic/layerParams",
+      name:"/basic/layerParams",
+      component: resolve => require(['../demo/basic/layerParams'], resolve), //Home
+    },
+    {
       path:"/basic/draw",
       name:"/basic/draw",
       component: resolve => require(['../demo/basic/draw'], resolve), //Home
@@ -98,13 +113,33 @@ export default new Router({
     {
       path:"/medium/drawOnline",
       name:"/medium/drawOnline",
-      component: resolve => require(['../demo/medium/draw'], resolve), //Home
+      component: resolve => require(['../demo/medium/cs.vue'], resolve), //Home
     },
-    // {
-    //   path:"/medium/drawOnline",
-    //   name:"/medium/drawOnline",
-    //   component: resolve => require(['../demo/medium/cs'], resolve), //Home
-    // },
+    {
+      path:"/medium/divideMap",
+      name:"/medium/divideMap",
+      component: resolve => require(['../demo/medium/divideMap'], resolve), //Home
+    },
+    {
+      path:"/medium/clock",
+      name:"/medium/clock",
+      component: resolve => require(['../demo/medium/clock'], resolve), //Home
+    },
+    {
+      path:"/medium/loadCtrbyDis",
+      name:"/medium/loadCtrbyDis",
+      component: resolve => require(['../demo/medium/loadCtrbyDis'], resolve), //Home
+    },
+    {
+      path:"/medium/shadow",
+      name:"/medium/shadow",
+      component: resolve => require(['../demo/medium/shadow'], resolve), //Home
+    },
+    {
+      path:"/medium/czml",
+      name:"/medium/czml",
+      component: resolve => require(['../demo/medium/czml'], resolve), //Home
+    },
 
 
 

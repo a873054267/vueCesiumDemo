@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-          <div class="selectModelType">
+          <div class="selectModelType" v-show="false">
             <!--<el-radio  label="1" @change="loadCompile">加载静态文件夹中的模型</el-radio>-->
             <el-select v-model="value" placeholder="请选择" @change="modeTypeChange">
               <el-option
@@ -50,9 +50,55 @@
       },
       methods:{
         otherOperations(){
-          //getInfoDataForExtent(1,2)
         let  url='static/data//CesiumMan/Cesium_Man.glb'
-          this.addModel(url,5000)
+          var worldTerrain =Cesium.createWorldTerrain();
+          viewer.terrainProvider=worldTerrain
+
+          var globe = viewer.scene.globe;
+
+          var clippingPlanesEnabled = true;
+          var edgeStylingEnabled = true;
+
+
+
+          var position = Cesium.Cartesian3.fromRadians(-2.0862979473351286, 0.6586620013036164, 1400.0);
+
+          var entity = viewer.entities.add({
+            position : position,
+            box : {
+              dimensions : new Cesium.Cartesian3(1400.0, 1400.0, 2800.0),
+              material : Cesium.Color.WHITE.withAlpha(0.3),
+              outline : true,
+              outlineColor : Cesium.Color.WHITE
+            }
+          });
+          // viewer.entities.add({
+          //   position : position,
+          //   model : {
+          //     uri : url,
+          //     minimumPixelSize : 128,
+          //     maximumScale : 800
+          //   }
+          // });
+
+          globe.depthTestAgainstTerrain = true;
+          globe.clippingPlanes = new Cesium.ClippingPlaneCollection({
+            modelMatrix : entity.computeModelMatrix(Cesium.JulianDate.now()),
+            planes : [
+              new Cesium.ClippingPlane(new Cesium.Cartesian3( 1.0,  0.0, 0.0), -700.0),
+              new Cesium.ClippingPlane(new Cesium.Cartesian3(-1.0,  0.0, 0.0), -700.0),
+              new Cesium.ClippingPlane(new Cesium.Cartesian3( 0.0,  1.0, 0.0), -700.0),
+              new Cesium.ClippingPlane(new Cesium.Cartesian3( 0.0, -1.0, 0.0), -700.0)
+            ],
+            edgeWidth: edgeStylingEnabled ? 1.0 : 0.0,
+            edgeColor: Cesium.Color.WHITE,
+            enabled : clippingPlanesEnabled
+          });
+          viewer.trackedEntity = entity;
+
+
+
+
 
         },
         //加载在编译目录下的三维模型
@@ -82,7 +128,9 @@
               maximumScale : 20000
             },
             description:"\<div>与infobox关联的提示信息在description属性中设置</div>\<div>可添加html标签，斜杠开头</div>"
-          });viewer.trackedEntity = entity;
+          });
+          viewer.trackedEntity = entity;
+          return entity
 
         },
         modeTypeChange(v){
@@ -92,7 +140,7 @@
             url='static/data/CesiumMan/test.glb'
           }
           console.log(url)
-          this.addModel(url,5000)
+          this.addModel(url,5)
         }
       }
     }

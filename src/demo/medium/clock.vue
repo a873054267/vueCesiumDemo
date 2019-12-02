@@ -1,9 +1,7 @@
 <template>
   <div class="wrapper">
     <!--<el-radio  label="1" @change="ctrGridLayer" v-model="open">关闭格网图层</el-radio>-->
-    <div  class="selectModelType">
-      <el-checkbox  v-model="open" @change="ctrGridLayer">是否显示格网图层{{dddd}}</el-checkbox>
-    </div>
+
     <Vcesium @loadeds="otherOperations"> </Vcesium>
   </div>
 </template>
@@ -28,25 +26,29 @@
 
     },
     computed:{
-      dddd:function sfd() {
-        console.log(geojson2h3)
-        return "1111"
-      }
+
     },
     methods:{
-      ctrGridLayer(v){
 
-        viewer.imageryLayers._layers[1].show=v
-
-      },
 
       otherOperations(){
+        viewer.scene.globe.enableLighting = true;
+        var clock = new Cesium.Clock({
+          startTime : Cesium.JulianDate.fromIso8601('2013-12-25'),
+          currentTime : Cesium.JulianDate.fromIso8601('2013-12-25'),
+          stopTime : Cesium.JulianDate.fromIso8601('2013-12-26'),
+          clockRange : Cesium.ClockRange.LOOP_STOP, // loop when we hit the end time
+          clockStep : Cesium.ClockStep.SYSTEM_CLOCK_MULTIPLIER,
+          multiplier : 4000, // how much time to advance each tick
+          shouldAnimate : true // Animation on by default
+        });
+        viewer.clock=true
+       // viewer.clockViewModel=new Cesium.ClockViewModel(clock)
 
-        // let layer=new Cesium.GridImageryProvider();
-        //
-        // var TileCoordinatesImagery = new Cesium.TileCoordinatesImageryProvider();
-        // viewer.imageryLayers.addImageryProvider(layer)
-        // viewer.imageryLayers.addImageryProvider(TileCoordinatesImagery)
+
+
+
+
       },
 
 

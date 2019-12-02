@@ -12,6 +12,7 @@ Vue.use(ElementUI, {size: 'small'});//注入ElementUI
 window.Cesium = Cesium;
 Vue.config.productionTip = false
 
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

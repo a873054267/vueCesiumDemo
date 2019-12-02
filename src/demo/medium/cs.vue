@@ -1,15 +1,21 @@
 <template>
-    <div>
-      ssssssssss
-    </div>
+ <div class="s"></div>
 </template>
 
 <script>
-    export default {
-        name: "cs"
+  //import draw from './js/drawOnline'
+  export default {
+    methods: {
+
+
+    },
+    mounted(){
+     // draw()
+    },
+    data() {
+      return {
+
+      }
     }
+  }
 </script>
-
-<style scoped>
-
-</style>
