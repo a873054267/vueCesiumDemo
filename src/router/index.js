@@ -103,17 +103,11 @@ export default new Router({
       name:"/basic/layerParams",
       component: resolve => require(['../demo/basic/layerParams'], resolve), //Home
     },
-    {
-      path:"/basic/draw",
-      name:"/basic/draw",
-      component: resolve => require(['../demo/basic/draw'], resolve), //Home
-    },
-
 
     {
       path:"/medium/drawOnline",
       name:"/medium/drawOnline",
-      component: resolve => require(['../demo/medium/cs.vue'], resolve), //Home
+      component: resolve => require(['../demo/medium/draw.vue'], resolve), //Home
     },
     {
       path:"/medium/divideMap",

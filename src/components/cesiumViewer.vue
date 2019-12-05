@@ -25,6 +25,8 @@ export default {
         url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
         enablePickFeatures: false
       }),
+      selectionIndicator : false,
+      infoBox : false,
      // terrainProvider: Cesium.createWorldTerrain(),
       shouldAnimate : true
     });
