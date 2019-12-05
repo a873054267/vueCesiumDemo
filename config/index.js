@@ -11,11 +11,11 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/tdt': {
-        target: 'http://t0.tianditu.com/',
+      '/tileset': {
+        target: 'http://localhost:3000/',
         changeOrigin: true,
         pathRewrite: {
-          '^/tdt': ''
+          '^/tileset': ''
         },
       },
       '/local': {

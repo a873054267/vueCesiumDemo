@@ -43,7 +43,8 @@
           shouldAnimate : true // Animation on by default
         });
         viewer.clock=true
-       // viewer.clockViewModel=new Cesium.ClockViewModel(clock)
+       viewer.clockViewModel=new Cesium.ClockViewModel(clock)
+
 
 
 

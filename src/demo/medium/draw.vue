@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="selectModelType">
       <!--<el-radio  label="1" @change="loadCompile">加载静态文件夹中的模型</el-radio>-->
-      <el-select    placeholder="请选择" @change="modeTypeChange">
+      <el-select   v-model="typeValue" placeholder="请选择" @change="modeTypeChange">
         <el-option
           v-for="item in options"
           :key="item.value"
@@ -154,8 +154,7 @@ var floatingPoint;
       modeTypeChange(v){
 
         //this.terminateShape()
-        debugger
-        this.typeValue=v
+
         // let _this=this
         // viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
         // var handler = new Cesium.ScreenSpaceEventHandler(viewer.canvas);

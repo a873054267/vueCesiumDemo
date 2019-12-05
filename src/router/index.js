@@ -133,7 +133,12 @@ export default new Router({
       path:"/medium/czml",
       name:"/medium/czml",
       component: resolve => require(['../demo/medium/czml'], resolve), //Home
+    },{
+      path:"/medium/loadPointCloud",
+      name:"/medium/loadPointCloud",
+      component: resolve => require(['../demo/medium/loadPointCloud'], resolve), //Home
     },
+
 
 
 

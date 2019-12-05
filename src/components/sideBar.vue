@@ -68,6 +68,7 @@
             {title:"模型根据距离条件显隐",index:"/medium/loadCtrbyDis"},
             {title:"模型阴影",index:"/medium/shadow"},
             {title:"czml加载模型",index:"/medium/czml"},
+            {title:"加载点云模型",index:"/medium/loadPointCloud"},
             {title:"可视域分析",index:"ksh"}]
         },{
           index:"advance",
