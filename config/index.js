@@ -24,6 +24,13 @@ module.exports = {
           pathRewrite: {
           '^/local': ''
         },
+        '/tdt': {
+          target: 'http://t0.tianditu.com/',
+          changeOrigin: true,
+          pathRewrite: {
+            '^/tdt': ''
+          },
+        },
 },
 
 

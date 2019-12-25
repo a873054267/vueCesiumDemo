@@ -25,7 +25,7 @@
       }
     },
     mounted(){
-      console.log(this.$router)
+
      // this.$router.push("/basic/hello");
     },
     data() {
@@ -69,6 +69,8 @@
             {title:"模型阴影",index:"/medium/shadow"},
             {title:"czml加载模型",index:"/medium/czml"},
             {title:"加载点云模型",index:"/medium/loadPointCloud"},
+            {title:"动态调整模型",index:"/medium/modifyModel"},
+            {title:"作业库模型渲染",index:"/medium/loadRoad"},
             {title:"可视域分析",index:"ksh"}]
         },{
           index:"advance",

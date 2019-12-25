@@ -42,7 +42,7 @@
           multiplier : 4000, // how much time to advance each tick
           shouldAnimate : true // Animation on by default
         });
-        viewer.clock=true
+       // viewer.clock=true
        viewer.clockViewModel=new Cesium.ClockViewModel(clock)
 
 

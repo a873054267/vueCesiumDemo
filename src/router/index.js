@@ -137,7 +137,17 @@ export default new Router({
       path:"/medium/loadPointCloud",
       name:"/medium/loadPointCloud",
       component: resolve => require(['../demo/medium/loadPointCloud'], resolve), //Home
+    },{
+      path:"/medium/modifyModel",
+      name:"/medium/modifyModel",
+      component: resolve => require(['../demo/medium/modifyModel'], resolve), //Home
     },
+    {
+      path:"/medium/loadRoad",
+      name:"/medium/loadRoad",
+      component: resolve => require(['../demo/medium/loadRoad'], resolve), //Home
+    },
+
 
 
 

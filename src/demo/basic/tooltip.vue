@@ -9,9 +9,7 @@
   /**
    * 工具库
    */
-  import {
-   getInfoDataForExtent
-  } from "../../../static/js/utils.js";
+
   //require model from './data/CesiumMan/Cesium_Man.glb'
 
   import  Vcesium from '../../components/cesiumViewer'

@@ -155,7 +155,7 @@
 
         },
         otherOperations(){
-          this.loadFeature("bmap")
+          this.loadFeature("countryTDT")
         },
         modeTypeChange(v){
             this.loadFeature(v)

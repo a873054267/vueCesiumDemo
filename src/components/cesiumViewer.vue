@@ -20,6 +20,8 @@ export default {
     //   format: "image/jpeg",
     //   tileMatrixSetID: "GoogleMapsCompatible",
     //   show: true})
+    //var cs=Cesium.createDefaultImageryProviderViewModels()
+
     let viewer = new Cesium.Viewer('cesiumContainer',{
       imageryProvider:new Cesium.ArcGisMapServerImageryProvider({
         url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
@@ -28,11 +30,15 @@ export default {
       selectionIndicator : false,
       infoBox : false,
      // terrainProvider: Cesium.createWorldTerrain(),
-      shouldAnimate : true
+      shouldAnimate : true,
+      baseLayerPicker:true,
+     // selectedImageryProviderViewModel:cs[7],
+
     });
+
     window.viewer=viewer //全局注册viewer
-    window.Cesium=Cesium
-    console.log(viewer)
+
+    //console.log(viewer)
     this.$emit("loadeds")
   },
 };
