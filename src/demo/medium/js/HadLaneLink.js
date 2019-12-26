@@ -3,6 +3,11 @@ class HadLaneLink extends HadObjClass{
   constructor(pbfdata){
     super(pbfdata)
     this.type="Had_laneLink"
+    this.style={
+      color:Cesium.Color.CORNSILK,
+      width:1,
+      alpha:1
+    }
   }
   getAttr(){
 
@@ -11,14 +16,14 @@ class HadLaneLink extends HadObjClass{
       var geometryInstanceArray=[]
       var lineStringArray
       //遍历获取图幅中的所有link数量
-    console.log(this.pbfdata)
-      this.pbfdata.hadlanelinklist.linkList.map(v =>{
+      console.log(this.pbfdata)
+      this.pbfdata.hadlanemarklinklist.linkList.map(v =>{
         lineStringArray = new Array();
         //遍历取出每条link的坐标，并添加高程
         v.geometry.linestringList.map(v2 => {
           lineStringArray.push(v2.longitude);
           lineStringArray.push(v2.latitude);
-          lineStringArray.push(0);
+          lineStringArray.push(v2.elevation);
 
         })
        let pr= this.getGeometryInstance(lineStringArray)
@@ -34,7 +39,7 @@ class HadLaneLink extends HadObjClass{
       geometryInstances : this.getGeom(),
       appearance : new Cesium.PolylineMaterialAppearance({
         material : Cesium.Material.fromType("Color", {
-          color : Cesium.Color.BLUE
+          color : this.style.color
         })
       }),
     }))

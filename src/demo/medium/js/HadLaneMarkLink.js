@@ -1,11 +1,11 @@
 import {HadObjClass} from "./HadObjClass";
-class HadLink extends HadObjClass{
+class HadLaneMarkLink extends HadObjClass{
   constructor(pbfdata){
     super(pbfdata)
-    this.type="Had_Link"
+    this.type="Had_laneMarkLink"
     this.style={
-      color:Cesium.Color.BLUE,
-      width:5,
+      color:Cesium.Color.SNOW,
+      width:2,
       alpha:1
     }
   }
@@ -16,7 +16,8 @@ class HadLink extends HadObjClass{
       var geometryInstanceArray=[]
       var lineStringArray
       //遍历获取图幅中的所有link数量
-      this.pbfdata.linkList.map(v =>{
+
+      this.pbfdata.hadlanelinklist.linkList.map(v =>{
         lineStringArray = new Array();
         //遍历取出每条link的坐标，并添加高程
         v.geometry.linestringList.map(v2 => {
@@ -34,17 +35,17 @@ class HadLink extends HadObjClass{
 
   }
   render(){
-    var primitive= viewer.scene.primitives.add(new Cesium.Primitive({
+    var pr=  viewer.scene.primitives.add(new Cesium.Primitive({
       geometryInstances : this.getGeom(),
       appearance : new Cesium.PolylineMaterialAppearance({
-        material : new Cesium.Material.fromType("PolylineArrow", {
-          color : this.style.color,
+        material : Cesium.Material.fromType("Color", {
+          color :this.style.color
         })
-      })
+      }),
     }))
-    primitive.layerType="link"
+    pr.layerType="laneLink"
   }
 
 
 }
-export {HadLink}
+export {HadLaneMarkLink}

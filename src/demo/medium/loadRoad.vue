@@ -20,6 +20,8 @@
   import {getMeshList,getRect} from '../../commonJS/utils'
   import {HadLink} from "./js/HadLink";
   import {HadLaneLink} from "./js/HadLaneLink";
+  import {HadLaneMarkLink} from "./js/HadLaneMarkLink";
+  import {HadLanePolygon} from "./js/HadLanePolygon";
   import axios from 'axios'
   export default {
     name: "hello",
@@ -75,10 +77,18 @@
             obj=new HadLink(data)
             break
           case "had_lane_link":
+            //车道线
             obj=new HadLaneLink(data)
+            //参考线
+                let obj2=new HadLaneMarkLink(data)
+            let obj3=new HadLanePolygon(data)
+               // obj3.getGeom()
+                obj3.render()
+               // obj2.render()
+
 
         }
-        obj.render()
+      //  obj.render()
       },
       //根据图幅列表查询数据
       queryDataByMeshList(meshList){

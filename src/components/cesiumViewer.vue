@@ -29,7 +29,7 @@ export default {
       }),
       selectionIndicator : false,
       infoBox : false,
-     // terrainProvider: Cesium.createWorldTerrain(),
+      //terrainProvider: Cesium.createWorldTerrain(),
       shouldAnimate : true,
       baseLayerPicker:true,
      // selectedImageryProviderViewModel:cs[7],
