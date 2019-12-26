@@ -81,11 +81,12 @@
       },
       methods:{
         modeTypeChange(v){
+         console.log(viewer.scene.primitives)
           this.loadFeature(v)
 
         },
         loadFeature(type){
-          viewer.scene.primitives.removeAll();
+          //viewer.scene.primitives.removeAll();
           let pr
           let instance
 
@@ -394,7 +395,7 @@
 
           }
           viewer.scene.primitives.add(pr);
-          console.log(instance)
+          // console.log(instance)
           viewer.camera.setView({
             destination : Cesium.Cartesian3.fromDegrees(-109.0, 30.0,5000000)
           });
