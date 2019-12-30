@@ -4,7 +4,7 @@ class HadLanePolygon extends HadObjClass{
     super(pbfdata)
     this.type="HadLanePolygon"
     this.style={
-      color:new Cesium.Color(0,0,255,0.3),
+      color:new Cesium.Color(0,0,1,0.3),
       width:1,
       alpha:1
     }
@@ -24,12 +24,13 @@ class HadLanePolygon extends HadObjClass{
     return lineStringArray
   }
   getGeom(){
-    // 面信息返回结果
+    // 根据中心线左侧laneid和右侧laneid拼成车道面
     var polygenArray = new Array();
 
       let laneMarkLinkArray={}
       //遍历获取图幅中的所有link数量
-      console.log(this.pbfdata)
+      //console.log(this.pbfdata)
+    //先获取mark的坐标，以lanemarklinkpid为key值来存储，lanelink中对应存储了geometry
       this.pbfdata.hadlanemarklinklist.linkList.map(v =>{
         // 获得ID
         var lanemarklinkpid = v.lanemarklinkpid;
@@ -39,21 +40,22 @@ class HadLanePolygon extends HadObjClass{
       })
 
     var lineStringArray
+    //遍历中心线
     this.pbfdata.hadlanelinklist.linkList.map(v =>{
       lineStringArray = new Array();
       // 左侧边界
       var leftLaneMarkLinkPid = v.leftlanemarklinkpid;
       // 右侧边界
       var rightLaneMarkLinkPid = v.rightlanemarklinkpid;
-      // 组装坐标数组
+      // 取左侧坐标
       lineStringArray = lineStringArray
         .concat(laneMarkLinkArray["mlp_"
         + leftLaneMarkLinkPid]);// 把左边的坐标存储上
-
       var rightLength = laneMarkLinkArray["mlp_" + rightLaneMarkLinkPid].length;
       var rightArray = laneMarkLinkArray["mlp_" + rightLaneMarkLinkPid];
 
       for (var i = 0; i < rightLength;) {// 反向存储右侧坐标
+
         {
           var offset3 = rightLength - 3 - i;
           lineStringArray = lineStringArray.concat([
@@ -67,22 +69,30 @@ class HadLanePolygon extends HadObjClass{
       polygenArray.push(lineStringArray);
 
     })
-
-    // var geometryInstanceArray = new Array();
-    // polygenArray.map(v => {
-    //   var polygon = new Cesium.PolygonGeometry({// 直接使用这个会生成贴地面
-    //     polygonHierarchy : new Cesium.PolygonHierarchy(Cesium.Cartesian3
-    //       .fromDegreesArrayHeights(v))
-    //   });
-    //   geometryInstanceArray.push(new Cesium.GeometryInstance({
-    //     geometry : Cesium.CoplanarPolygonGeometry.createGeometry(polygon)
-    //   }))
-    // })
-      return geometryInstanceArray
+      return polygenArray
    }
+   generateGemetryInstance() {
+     // 获得绘制对象
+     var geometryInstanceArray = new Array();
+     let instance
+     this.getGeom().map(v => {
+       var polygon = new Cesium.PolygonGeometry({// 直接使用这个会生成贴地面
+         polygonHierarchy : new Cesium.PolygonHierarchy(Cesium.Cartesian3.fromDegreesArrayHeights(v))
+       });
+      instance= new Cesium.GeometryInstance({
+         geometry : Cesium.CoplanarPolygonGeometry.createGeometry(polygon)
+       });
+      geometryInstanceArray.push(instance)
+
+     })
+
+     return geometryInstanceArray
+   }
+
   render(){
-    var pr=  viewer.scene.primitives.add(new Cesium.Primitive({
-      geometryInstances : this.getGeom(),
+    var pr=  viewer.scene.primitives.add(
+      new Cesium.Primitive({
+      geometryInstances : this.generateGemetryInstance(),
       appearance : new Cesium.MaterialAppearance({
         material : Cesium.Material.fromType("Color", {
           color : this.style.color
@@ -91,6 +101,7 @@ class HadLanePolygon extends HadObjClass{
         classificationType : Cesium.ClassificationType.BOTH
 
       }),
+   asynchronous:false
     }))
     pr.layerType="HadLanePolygon"
   }

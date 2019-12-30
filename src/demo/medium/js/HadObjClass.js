@@ -10,6 +10,7 @@ class HadObjClass{
       geometry : new Cesium.PolylineGeometry({
         positions : Cesium.Cartesian3.fromDegreesArrayHeights(lineStringArray),
         width : this.style.width,// 线宽
+        dashLength : 60,
         vertexFormat : Cesium.PolylineColorAppearance.POSITION_ONLY
       })
 

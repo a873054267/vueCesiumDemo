@@ -81,14 +81,17 @@
             obj=new HadLaneLink(data)
             //参考线
                 let obj2=new HadLaneMarkLink(data)
-            let obj3=new HadLanePolygon(data)
-               // obj3.getGeom()
+             let obj3=new HadLanePolygon(data)
                 obj3.render()
-               // obj2.render()
+                obj2.render()
+                break
+          case "pole":
+            //obj=
+                break;
 
 
         }
-      //  obj.render()
+        obj.render()
       },
       //根据图幅列表查询数据
       queryDataByMeshList(meshList){
@@ -112,6 +115,10 @@
             break
           case "had_lane_link":
             data=proto.com.navinfo.had.model.HadLanes.deserializeBinary(bytes).toObject();
+            break
+          case "pole":
+            data=proto.com.navinfo.had.model.HadObjectPoleList.deserializeBinary(bytes).toObject();
+            break
         }
         return data
 
@@ -136,6 +143,7 @@
 
       },
       otherOperations(){
+        console.log(Cesium.Color.BLUE)
 
         let _this=this
         viewer.camera.flyTo({

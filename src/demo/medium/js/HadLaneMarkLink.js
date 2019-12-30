@@ -26,6 +26,7 @@ class HadLaneMarkLink extends HadObjClass{
           lineStringArray.push(v2.elevation);
 
         })
+
        let pr= this.getGeometryInstance(lineStringArray)
         geometryInstanceArray.push(pr)
       })
