@@ -1,15 +1,19 @@
 <template>
   <div class="wrapper">
     <div class="selectModelType" >
-      <div class="tip"><p>默认控件的显示与隐藏</p></div>
+      <div class="tip">默认控件的显示与隐藏</div>
+      <span class="el-checkbox" style="font-weight: bold">General</span>
+      <el-checkbox-group v-model="checkfactorList" @change="ctrObjVis">
 
-      <template v-for="(item,index) in attr">
-        <div style="text-align: left">
-          <el-checkbox   @change="ctrObjVis(index)" class="chb"
-                         v-model="item.checked"
-          >{{item.lable}}</el-checkbox>
-        </div>
-      </template>
+        <el-checkbox  v-for="(item,index) in attr" :key="item.lable" :label="index">{{item.lable}}</el-checkbox>
+      </el-checkbox-group>
+      <!--<template v-for="(item,index) in attr">-->
+      <!--<div class="checkbox-style">-->
+      <!--<el-checkbox   @change="ctrObjVis(index)" class="chb"-->
+      <!--v-model="item.checked"-->
+      <!--&gt;{{item.lable}}</el-checkbox>-->
+      <!--</div>-->
+      <!--</template>-->
     </div>
     <Vcesium @loadeds="otherOperations"></Vcesium>
   </div>
@@ -27,41 +31,151 @@
     name: "hello",
     data(){
       return{
-        attr:[{
-          lable:"link",
-          value:"had_link",
-          checked:true
-        },{
-          lable:"arrow",
-          value:"had_object_arrow",
-
-        },{
-          lable:"laneLink",
-          key:"had_lane_link",
-        },{
-          lable:"linePole",
-          value:"had_object_line_pole",
-        },{
-          lable:"pole",
-
-          value:"had_object_pole"
-        },{
-          lable:"curb",
-          value:"had_object_curb"
-        },{
-          lable:"trafficSign",
-          value:true,
-          key:"had_object_traffic_sign"
-        },{
-          lable:"wall",
-          value:true,
-          key:"wall"
-        },{
-          lable:"overheadCrossing",
-          value:true,
-          key:"overheadCrossing"
-        }
-        ]
+        attr:[
+          //道路
+          {
+            lable:"link",
+            value:"had_link",
+            checked:true
+          },
+          //箭头
+          {
+            lable:"arrow",
+            value:"had_object_arrow",
+          },
+          //车道
+          {
+            lable:"laneLink",
+            value:"had_lane_link",
+          },
+          //车道杆
+          {
+            lable:"linePole",
+            value:"had_object_line_pole",
+          },
+          //杆
+          {
+            lable:"pole",
+            value:"had_object_pole"
+          },
+          //路牙
+          {
+            lable:"curb",
+            value:"had_object_curb"
+          },
+          //交通牌
+          {
+            lable:"trafficSign",
+            value:"had_object_traffic_sign"
+          },
+          //墙
+          {
+            lable:"wall",
+            value:'had_object_wall',
+          },
+          //上方障碍物
+          {
+            lable:"overheadCrossing",
+            value:'had_object_overhead_crossing',
+          },
+          //公交站牌
+          {
+            lable:"busStop",
+            value:'had_object_bus_stop',
+          },
+          //电话亭
+          {
+            lable:"callBox",
+            value:'had_object_call_box',
+          },
+          //人行横道
+          {
+            lable:"crossWalk",
+            value:'had_object_cross_walk',
+          },
+          //导流区
+          {
+            lable:"fillArea",
+            value:'had_object_fill_area',
+          },
+          //可变交通信息牌
+          {
+            lable:"messageSign",
+            value:'had_object_message_sign',
+          },
+          //可变交通信息牌
+          {
+            lable:"overheadStructure",
+            value:'had_object_overhead_structure',
+          },
+          //桥墩
+          {
+            lable:"pillar",
+            value:'had_object_pillar',
+          },
+          //桥墩
+          {
+            lable:"text",
+            value:'had_object_text',
+          },
+          //减速带
+          {
+            lable:"speedBump",
+            value:'had_object_speed_bump',
+          },
+          //轮廓标
+          {
+            lable:"delineator",
+            value:'had_object_delineator',
+          },
+          //沟
+          {
+            lable:"ditch",
+            value:'had_object_ditch',
+          },
+          //停止位置
+          {
+            lable:"stopLocation",
+            value:'had_object_stop_location',
+          },
+          //符号
+          {
+            lable:"symbol",
+            value:'had_object_symbol',
+          },
+          //垂直墙
+          {
+            lable:"wallPerpendicular",
+            value:'had_object_wall_perpendicular',
+          },
+          //收费站
+          {
+            lable:"tollBooth",
+            value:'had_object_toll_booth',
+          },
+          //隧道
+          {
+            lable:"tunnel",
+            value:'had_object_tunnel',
+          },
+          //交通灯
+          {
+            lable:"trafficLights",
+            value:'had_object_traffic_lights',
+          },
+          //护栏
+          {
+            lable:"trafficBarrier",
+            value:'had_object_traffic_barrier',
+          },
+          //警示区
+          {
+            lable:"warningArea",
+            value:'had_object_warning_area',
+          },
+        ],
+        //选中的数据
+        checkfactorList:[],
       }
     },
     components:{
@@ -80,16 +194,14 @@
             //车道线
             obj=new HadLaneLink(data)
             //参考线
-                let obj2=new HadLaneMarkLink(data)
-             let obj3=new HadLanePolygon(data)
-                obj3.render()
-                obj2.render()
-                break
+            let obj2=new HadLaneMarkLink(data)
+            let obj3=new HadLanePolygon(data)
+            obj3.render()
+            obj2.render()
+            break
           case "pole":
             //obj=
-                break;
-
-
+            break;
         }
         obj.render()
       },
@@ -102,12 +214,10 @@
           typeList.map(v2 =>{
             _this.queryMeshDataByID(v,v2,_this.parseObjData)
           })
-
         })
       },
       //反序列化
       parseHadData(type,bytes){
-
         let data
         switch (type){
           case "had_link":
@@ -121,7 +231,6 @@
             break
         }
         return data
-
       },
       //根据图幅号查询数据
       queryMeshDataByID(meshID,type,callback){
@@ -140,11 +249,9 @@
         }).catch( res => {
           console.log("图幅不存在")
         })
-
       },
       otherOperations(){
         console.log(Cesium.Color.BLUE)
-
         let _this=this
         viewer.camera.flyTo({
           destination : Cesium.Cartesian3.fromDegrees(116.24638127872265, 40.0676722018202, 2000),
@@ -153,43 +260,71 @@
             let meshList=getMeshList(rect.northeast.lng,
               rect.southwest.lng, rect.northeast.lat, rect.southwest.lat)
             _this.queryDataByMeshList(meshList)
-
           }
         });
-
-
       },
-
-
-
-      ctrObjVis(index){
-        var laneLink=viewer.scene.primitives._primitives.filter(v =>{
-          return v.layerType=="laneLink"
-        })
-        console.log(laneLink)
-        laneLink.map(v => {
-
-          v.show=!v.show
-        })
+      ctrObjVis(indexArray){
+        let checkedLabelArray = [];
+        indexArray.forEach((item,index)=>{
+          checkedLabelArray.push(this.attr[item].lable); //存储选中数据的label;
+        });
+        viewer.scene.primitives._primitives.forEach((item,array)=>{
+          //全部设置为false
+          item.show= false
+          //选中的设为true
+          if(checkedLabelArray.indexOf(item.layerType)!=-1){
+            item.show=true;
+          }
+        });
+        // var showLayer=viewer.scene.primitives._primitives.filter(v =>{
+        //   return checkedLabelArray.indexOf(v.layerType)!=-1;
+        // })
+        // // console.log(laneLink)
+        // showLayer.map(v => {
+        //
+        //   v.show=true;
+        // })
         // viewer.scene.primitives._primitives.appearance.show=false
-
       }
-
     }
   }
 </script>
 
 <style scoped>
+  .el-checkbox {
+    display: table;
+    color: #EDFFFF!important;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-right: 30px;
+  }
+  .checkbox-style{
+    text-align: left;
+  }
   .selectModelType{
+    color:#EDFFFF;
+    transition: width ease-in-out 0.25s;
+    background: rgba(48,51,54,0.8);
+    border: 1px solid #444;
+    /*background-color: #4C4C4B;*/
+    /*opacity:0.2;*/
     position: absolute;
     width: 220px;
     margin: 20px;
     z-index: 100;
     padding: 10px;
-
+  }
+  .tip {
+    padding-bottom:3px;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    margin-bottom:10px;
   }
   .chb{
-
     margin: 3px;
   }
 </style>
