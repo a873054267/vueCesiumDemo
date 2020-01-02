@@ -2,8 +2,8 @@
   <div class="wrapper">
 
     <div class="selectModelType" >
-      <div class="tip">默认控件的显示与隐藏</div>
-      <span class="el-checkbox" style="font-weight: bold">General</span>
+      <div class="tip">图层控制</div>
+      <!--<span class="el-checkbox" style="font-weight: bold">General</span>-->
       <el-checkbox-group v-model="checkfactorList" >
         <template  v-for="(item,index) in attr">
           <el-checkbox
