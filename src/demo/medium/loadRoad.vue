@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    
     <div class="selectModelType" >
       <div class="tip">默认控件的显示与隐藏</div>
       <span class="el-checkbox" style="font-weight: bold">General</span>
