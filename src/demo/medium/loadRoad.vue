@@ -1,12 +1,16 @@
 <template>
   <div class="wrapper">
-    
+
     <div class="selectModelType" >
       <div class="tip">默认控件的显示与隐藏</div>
       <span class="el-checkbox" style="font-weight: bold">General</span>
-      <el-checkbox-group v-model="checkfactorList" @change="ctrObjVis">
+      <el-checkbox-group v-model="checkfactorList" >
+        <template  v-for="(item,index) in attr">
+          <el-checkbox
+            v-model="item.checked"
+            :key="item.lable" :label="index" :checked="true" @change="ctrObjVisItem(index)">{{item.lable}}</el-checkbox>
+        </template>
 
-        <el-checkbox  v-for="(item,index) in attr" :key="item.lable" :label="index">{{item.lable}}</el-checkbox>
       </el-checkbox-group>
       <!--<template v-for="(item,index) in attr">-->
       <!--<div class="checkbox-style">-->
@@ -33,9 +37,11 @@
   import {HadArrow} from "./js/HadArrow";
   import {HadCurb} from "./js/HadCurb";
   import {HadTrafficSign} from "./js/HadTrafficSign";
-
+  import {HadWall} from "./js/HadWall";
+  import {HadCrossHeading} from "./js/HadCrossHeading";
   //import * from "./js/importIndex";
   import axios from 'axios'
+  import {HadBusStop} from "./js/HadBusStop";
   export default {
     name: "hello",
     data(){
@@ -47,140 +53,167 @@
             value:"had_link",
             checked:true
           },
-          //箭头
-          {
-            lable:"arrow",
-            value:"had_object_arrow",
-          },
+          // //箭头
+          // {
+          //   lable:"arrow",
+          //   value:"had_object_arrow",
+          //   checked:true
+          // },
           //车道
           {
             lable:"laneLink",
             value:"had_lane_link",
+            checked:true
           },
-          //车道杆
-          {
-            lable:"linePole",
-            value:"had_object_line_pole",
-          },
+          // //车道杆
+          // {
+          //   lable:"linePole",
+          //   value:"had_object_line_pole",
+          //   checked:true
+          // },
           //杆
           {
             lable:"pole",
-            value:"had_object_pole"
+            value:"had_object_pole",
+            checked:true
           },
           //路牙
           {
             lable:"curb",
-            value:"had_object_curb"
+            value:"had_object_curb",
+            checked:true
           },
           //交通牌
           {
             lable:"trafficSign",
-            value:"had_object_traffic_sign"
+            value:"had_object_traffic_sign",
+            checked:true
           },
           //墙
           {
             lable:"wall",
             value:'had_object_wall',
+            checked:true
           },
           //上方障碍物
           {
             lable:"overheadCrossing",
             value:'had_object_overhead_crossing',
+            checked:true
           },
           //公交站牌
           {
             lable:"busStop",
             value:'had_object_bus_stop',
+            checked:true
           },
           //电话亭
           {
             lable:"callBox",
             value:'had_object_call_box',
+            checked:true
           },
           //人行横道
           {
             lable:"crossWalk",
             value:'had_object_cross_walk',
+            checked:true
           },
           //导流区
           {
             lable:"fillArea",
             value:'had_object_fill_area',
+            checked:true
           },
           //可变交通信息牌
           {
             lable:"messageSign",
             value:'had_object_message_sign',
+            checked:true
           },
           //可变交通信息牌
           {
             lable:"overheadStructure",
             value:'had_object_overhead_structure',
+            checked:true
           },
           //桥墩
           {
             lable:"pillar",
             value:'had_object_pillar',
+            checked:true
           },
           //桥墩
           {
             lable:"text",
             value:'had_object_text',
+            checked:true
           },
           //减速带
           {
             lable:"speedBump",
             value:'had_object_speed_bump',
+            checked:true
           },
           //轮廓标
           {
             lable:"delineator",
             value:'had_object_delineator',
+            checked:true
           },
           //沟
           {
             lable:"ditch",
             value:'had_object_ditch',
+            checked:true
           },
           //停止位置
           {
             lable:"stopLocation",
             value:'had_object_stop_location',
+            checked:true
           },
           //符号
           {
             lable:"symbol",
             value:'had_object_symbol',
+            checked:true
           },
           //垂直墙
           {
             lable:"wallPerpendicular",
             value:'had_object_wall_perpendicular',
+            checked:true
           },
           //收费站
           {
             lable:"tollBooth",
             value:'had_object_toll_booth',
+            checked:true
           },
           //隧道
           {
             lable:"tunnel",
             value:'had_object_tunnel',
+            checked:true
           },
           //交通灯
           {
             lable:"trafficLights",
             value:'had_object_traffic_lights',
+            checked:true
           },
           //护栏
           {
             lable:"trafficBarrier",
             value:'had_object_traffic_barrier',
+            checked:true
           },
           //警示区
           {
             lable:"warningArea",
             value:'had_object_warning_area',
+            checked:true
           },
         ],
         //选中的数据
@@ -191,6 +224,26 @@
       Vcesium
     },
     methods:{
+      //checkbox子选项选中与否状态
+      ctrObjVisItem(index){
+        let item=this.attr[index]
+        item.checked=!item.checked
+
+        var showLayer=viewer.scene.primitives._primitives.filter(v =>{
+          return v.layerType==item.value;
+        })
+        //选中则显示
+        if( item.checked){
+          showLayer.map(v =>{
+            v.show=true
+          })
+        }
+        else{
+          showLayer.map(v =>{
+            v.show=false
+          })
+        }
+      },
       //返回的数据已经被反序列化了
       parseObjData(data,type){
         let obj;
@@ -220,6 +273,16 @@
           case "had_object_traffic_sign":
             obj=new HadTrafficSign(data)
             break
+          case "had_object_wall":
+            obj=new HadWall(data)
+            break
+          case "had_object_overhead_crossing":
+            obj=new HadCrossHeading(data)
+            break
+          case "had_object_bus_stop":
+            obj=new HadBusStop(data)
+           break
+
         }
         obj.render()
       },
@@ -227,8 +290,11 @@
       queryDataByMeshList(meshList){
         let _this=this
         //要查询的数据种类
-        let typeList=["had_link","had_lane_link","had_object_pole","had_object_curb","had_object_traffic_sign"]
-        //typeList=["had_object_traffic_sign"]
+        let typeList=["had_link","had_lane_link","had_object_pole","had_object_curb","had_object_traffic_sign","had_object_wall","had_object_overhead_crossing",
+          "had_object_bus_stop"
+        ]
+        this.typeList=typeList
+       // typeList=["had_link","had_lane_link"]
         meshList.map(v => {
           typeList.map(v2 =>{
             _this.queryMeshDataByID(v,v2,_this.parseObjData)
@@ -257,7 +323,15 @@
           case "had_object_traffic_sign":
             data=proto.com.navinfo.had.model.HadObjectTrafficSignList.deserializeBinary(bytes).toObject();
             break
-
+          case "had_object_wall":
+            data= proto.com.navinfo.had.model.HadObjectWallList.deserializeBinary(bytes).toObject()
+            break
+          case "had_object_overhead_crossing":
+            data= proto.com.navinfo.had.model.HadObjectOverheadCrossingList.deserializeBinary(bytes).toObject();
+            break
+          case "had_object_bus_stop":
+            data=proto.com.navinfo.had.model.HadObjectBusStopList.deserializeBinary(bytes).toObject();
+            break
         }
         return data
       },
@@ -292,29 +366,6 @@
           }
         });
       },
-      ctrObjVis(indexArray){
-        let checkedLabelArray = [];
-        indexArray.forEach((item,index)=>{
-          checkedLabelArray.push(this.attr[item].lable); //存储选中数据的label;
-        });
-        viewer.scene.primitives._primitives.forEach((item,array)=>{
-          //全部设置为false
-          item.show= false
-          //选中的设为true
-          if(checkedLabelArray.indexOf(item.layerType)!=-1){
-            item.show=true;
-          }
-        });
-        // var showLayer=viewer.scene.primitives._primitives.filter(v =>{
-        //   return checkedLabelArray.indexOf(v.layerType)!=-1;
-        // })
-        // // console.log(laneLink)
-        // showLayer.map(v => {
-        //
-        //   v.show=true;
-        // })
-        // viewer.scene.primitives._primitives.appearance.show=false
-      }
     }
   }
 </script>

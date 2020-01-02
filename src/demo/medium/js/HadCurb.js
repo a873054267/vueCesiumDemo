@@ -2,7 +2,7 @@ import {HadObjClass} from "./HadObjClass";
 class HadCurb extends HadObjClass{
   constructor(pbfdata){
     super(pbfdata)
-    this.type="Had_Curb"
+    this.type="had_object_curb"
     this.style={
       color:Cesium.Color.CORNSILK,
       width:1,
@@ -62,7 +62,7 @@ class HadCurb extends HadObjClass{
       }),
       //debugShowBoundingVolume:true
     }))
-    pr.layerType="pole"
+    pr.layerType="had_object_curb"
   }
 
 

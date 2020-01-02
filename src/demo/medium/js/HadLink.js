@@ -2,7 +2,7 @@ import {HadObjClass} from "./HadObjClass";
 class HadLink extends HadObjClass{
   constructor(pbfdata){
     super(pbfdata)
-    this.type="Had_Link"
+    this.type="had_link"
     this.style={
       color:Cesium.Color.BLUE,
       width:5,
@@ -42,7 +42,7 @@ class HadLink extends HadObjClass{
         })
       })
     }))
-    primitive.layerType="link"
+    primitive.layerType="had_link"
   }
 
 

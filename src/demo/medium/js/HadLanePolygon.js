@@ -2,7 +2,7 @@ import {HadObjClass} from "./HadObjClass";
 class HadLanePolygon extends HadObjClass{
   constructor(pbfdata){
     super(pbfdata)
-    this.type="HadLanePolygon"
+    this.type="had_lane_link"
     this.style={
       color:new Cesium.Color(0,0,1,0.3),
       width:1,
@@ -103,7 +103,7 @@ class HadLanePolygon extends HadObjClass{
       }),
    asynchronous:false
     }))
-    pr.layerType="HadLanePolygon"
+    pr.layerType="had_lane_link"
   }
 
 

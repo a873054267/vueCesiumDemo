@@ -2,12 +2,12 @@ import {HadObjClass} from "./HadObjClass";
 class HadLaneMarkLink extends HadObjClass{
   constructor(pbfdata){
     super(pbfdata)
-    this.type="Had_laneMarkLink"
+    this.type="had_lane_link"
     this.style={
       color:Cesium.Color.SNOW,
       width:2,
       alpha:1,
-      dashLength:9.0
+      dashLength:20.0
     }
   }
   getAttr(){
@@ -40,13 +40,13 @@ class HadLaneMarkLink extends HadObjClass{
     var pr=  viewer.scene.primitives.add(new Cesium.Primitive({
       geometryInstances : this.getGeom(),
       appearance : new Cesium.PolylineMaterialAppearance({
-        material : Cesium.Material.fromType("Color", {
+        material : Cesium.Material.fromType("PolylineDash", {
           color :this.style.color,
           dashLength: this.style.dashLength
         })
       }),
     }))
-    pr.layerType="laneLink"
+    pr.layerType="had_lane_link"
   }
 
 

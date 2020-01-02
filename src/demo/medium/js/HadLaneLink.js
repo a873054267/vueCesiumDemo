@@ -2,7 +2,7 @@ import {HadObjClass} from "./HadObjClass";
 class HadLaneLink extends HadObjClass{
   constructor(pbfdata){
     super(pbfdata)
-    this.type="Had_laneLink"
+    this.type="had_lane_link"
     this.style={
       color:Cesium.Color.CORNSILK,
       width:1,
@@ -43,7 +43,7 @@ class HadLaneLink extends HadObjClass{
         })
       }),
     }))
-    pr.layerType="laneLink"
+    pr.layerType="had_lane_link"
   }
 
 

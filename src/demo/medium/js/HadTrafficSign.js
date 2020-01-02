@@ -2,7 +2,7 @@ import {HadObjClass} from "./HadObjClass";
 class HadTrafficSign extends HadObjClass{
   constructor(pbfdata){
     super(pbfdata)
-    this.type="HadTrafficSign"
+    this.type="had_object_traffic_sign"
     this.style={
       color:[Cesium.Color.BROWN,Cesium.Color.WHITE,Cesium.Color.YELLOW,Cesium.Color.RED,Cesium.Color.BROWN,Cesium.Color.BLUE,Cesium.Color.NAVAJOWHITE,
         Cesium.Color.BLACK,Cesium.Color.NAVAJOWHITE ,Cesium.Color.NAVAJOWHITE],
@@ -68,7 +68,7 @@ class HadTrafficSign extends HadObjClass{
       }),
       asynchronous:false
     }))
-    primitive.layerType="HadTrafficSign"
+    primitive.layerType="had_object_traffic_sign"
   }
 
 

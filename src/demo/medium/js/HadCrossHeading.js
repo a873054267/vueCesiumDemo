@@ -1,15 +1,18 @@
+/*************
+ * crossheading需要贴图，后续逻辑再更改
+ */
 import {HadObjClass} from "./HadObjClass";
-class HadPole extends HadObjClass{
+class HadCrossHeading extends HadObjClass{
   constructor(pbfdata){
     super(pbfdata)
-    this.type="had_object_pole"
+    this.type="had_object_overhead_crossing"
     this.style={
-      color:Cesium.Color.CORNSILK,
-      width:1,
+      color:Cesium.Color.BLUE,
+      width:2,
       alpha:1
     }
   }
-  generateInstance(lineStringArray){
+  getAttr(){
 
   }
   getGeom(){
@@ -17,14 +20,17 @@ class HadPole extends HadObjClass{
       var geometryInstanceArray=[]
       var lineStringArray
       //遍历获取图幅中的所有link数量
-
       this.pbfdata.objectList.map(v =>{
         lineStringArray = new Array();
         //遍历取出每条link的坐标，并添加高程
+
         v.geometry.linestringList.map(v2 => {
-          lineStringArray.push(v2.longitude);
-          lineStringArray.push(v2.latitude);
-          lineStringArray.push(v2.elevation);
+          v2.linestringList.map(v3 => {
+            lineStringArray.push(v3.longitude);
+            lineStringArray.push(v3.latitude);
+            lineStringArray.push(v3.elevation);
+          })
+
 
         })
        let pr= this.getGeometryInstance(lineStringArray)
@@ -36,17 +42,17 @@ class HadPole extends HadObjClass{
 
   }
   render(){
-    var pr=  viewer.scene.primitives.add(new Cesium.Primitive({
+    var primitive= viewer.scene.primitives.add(new Cesium.Primitive({
       geometryInstances : this.getGeom(),
       appearance : new Cesium.PolylineMaterialAppearance({
-        material : Cesium.Material.fromType("Color", {
-          color : this.style.color
+        material : new Cesium.Material.fromType("Color", {
+          color : this.style.color,
         })
-      }),
+      })
     }))
-    pr.layerType="had_object_pole"
+    primitive.layerType="had_object_overhead_crossing"
   }
 
 
 }
-export {HadPole}
+export {HadCrossHeading}
