@@ -22,10 +22,18 @@
 <script>
   import  Vcesium from '../../components/cesiumViewer'
   import {getMeshList,getRect} from '../../commonJS/utils'
+
+
   import {HadLink} from "./js/HadLink";
   import {HadLaneLink} from "./js/HadLaneLink";
   import {HadLaneMarkLink} from "./js/HadLaneMarkLink";
   import {HadLanePolygon} from "./js/HadLanePolygon";
+  import {HadPole} from "./js/HadPole";
+  import {HadArrow} from "./js/HadArrow";
+  import {HadCurb} from "./js/HadCurb";
+  import {HadTrafficSign} from "./js/HadTrafficSign";
+
+  //import * from "./js/importIndex";
   import axios from 'axios'
   export default {
     name: "hello",
@@ -199,9 +207,18 @@
             obj3.render()
             obj2.render()
             break
-          case "pole":
-            //obj=
+          case "had_object_pole":
+            obj=new HadPole(data)
             break;
+          case "had_object_arrow":
+            obj=new HadArrow(data)
+                break
+          case "had_object_curb":
+            obj=new HadCurb(data)
+                break
+          case "had_object_traffic_sign":
+            obj=new HadTrafficSign(data)
+            break
         }
         obj.render()
       },
@@ -209,7 +226,8 @@
       queryDataByMeshList(meshList){
         let _this=this
         //要查询的数据种类
-        let typeList=["had_link","had_lane_link"]
+        let typeList=["had_link","had_lane_link","had_object_pole","had_object_curb","had_object_traffic_sign"]
+        //typeList=["had_object_traffic_sign"]
         meshList.map(v => {
           typeList.map(v2 =>{
             _this.queryMeshDataByID(v,v2,_this.parseObjData)
@@ -226,9 +244,19 @@
           case "had_lane_link":
             data=proto.com.navinfo.had.model.HadLanes.deserializeBinary(bytes).toObject();
             break
-          case "pole":
+          case "had_object_pole":
             data=proto.com.navinfo.had.model.HadObjectPoleList.deserializeBinary(bytes).toObject();
             break
+          case "had_object_arrow":
+            data=proto.com.navinfo.had.model.HadObjectArrowList.deserializeBinary(bytes).toObject();
+            break
+          case "had_object_curb":
+            data=proto.com.navinfo.had.model.HadObjectCurbList.deserializeBinary(bytes).toObject();
+            break
+          case "had_object_traffic_sign":
+            data=proto.com.navinfo.had.model.HadObjectTrafficSignList.deserializeBinary(bytes).toObject();
+            break
+
         }
         return data
       },

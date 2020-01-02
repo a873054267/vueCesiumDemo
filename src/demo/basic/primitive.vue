@@ -209,6 +209,25 @@
                   material:Cesium.Material.fromType('Stripe')
                 })
               })
+              viewer.scene.primitives.add(pr);
+
+              instance = new Cesium.PolylineGeometry({
+                positions : Cesium.Cartesian3.fromDegreesArray([
+                  0.0, 5.0,
+                  5.0, 10.0
+                ]),
+                width : 10.0,
+                vertexFormat : Cesium.PolylineMaterialAppearance.VERTEX_FORMAT
+              })
+
+              pr=new Cesium.Primitive({
+                geometryInstances : new Cesium.GeometryInstance({
+                  geometry: instance,
+                }),
+                appearance : new Cesium.PolylineMaterialAppearance({
+                  material : Cesium.Material.fromType('Color')
+                })
+              })
 
               break
             case "wall":

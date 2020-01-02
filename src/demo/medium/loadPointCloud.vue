@@ -44,8 +44,8 @@
         // });
         // viewer.clock=true
        // viewer.clockViewModel=new Cesium.ClockViewModel(clock)
-        //var tileset = new Cesium.Cesium3DTileset({   url:'tileset/4545/tileset.json'});
-        var tileset = new Cesium.Cesium3DTileset({   url:'tileset/csarr/tileset.json'});
+        var tileset = new Cesium.Cesium3DTileset({   url:'tileset/4545/tileset.json'});
+        //var tileset = new Cesium.Cesium3DTileset({   url:'tileset/csarr/tileset.json'});
 
         // var tileset = new Cesium.Cesium3DTileset({ url: Cesium.IonResource.fromAssetId(5714) });
 

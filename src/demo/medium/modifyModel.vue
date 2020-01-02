@@ -279,9 +279,15 @@
           var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
           handler.setInputAction(function(movement) {
             var pick = viewer.scene.pick(movement.position);
+            console.log(pick)
+            pick.primitive.color=new Cesium.Color(1.0, 0.0, 0.0, 1.0);
 
-            console.log(pick.primitive.color)
-            pick.primitive.color=new Cesium.Color(1.0, 0.0, 0.0, 0);
+            //   console.log(pick)
+            // console.log(viewer.entities.getById(pick.id._id))
+            // pick.id.point.color=new Cesium.Color(1.0, 0.0, 0.0, 1);
+            // console.log(pick.primitive.color)
+            // pick.primitive.color=new Cesium.Color(1.0, 0.0, 0.0, 0);
+            // console.log(pick.primitive.color)
 
           },Cesium.ScreenSpaceEventType.LEFT_CLICK);
         },
