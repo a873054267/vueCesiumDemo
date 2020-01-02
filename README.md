@@ -1,3 +1,7 @@
+![image](https://github.com/a873054267/vueCesiumDemo/blob/master/static/d1.png)
+![image](https://github.com/a873054267/vueCesiumDemo/blob/master/static/d2.png)
+
+
 # vuecesium
 
 > A Vue.js project
