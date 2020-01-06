@@ -39,6 +39,7 @@
   import {HadTrafficSign} from "./js/HadTrafficSign";
   import {HadWall} from "./js/HadWall";
   import {HadCrossHeading} from "./js/HadCrossHeading";
+
   //import * from "./js/importIndex";
   import axios from 'axios'
   import {HadBusStop} from "./js/HadBusStop";
@@ -53,12 +54,12 @@
             value:"had_link",
             checked:true
           },
-          // //箭头
-          // {
-          //   lable:"arrow",
-          //   value:"had_object_arrow",
-          //   checked:true
-          // },
+          //箭头
+          {
+            lable:"arrow",
+            value:"had_object_arrow",
+            checked:true
+          },
           //车道
           {
             lable:"laneLink",
@@ -288,13 +289,14 @@
       },
       //根据图幅列表查询数据
       queryDataByMeshList(meshList){
-        let _this=this
+        let _this=this古
         //要查询的数据种类
-        let typeList=["had_link","had_lane_link","had_object_pole","had_object_curb","had_object_traffic_sign","had_object_wall","had_object_overhead_crossing",
+        let typeList=["had_link","had_object_arrow","had_lane_link","had_object_pole","had_object_curb","had_object_traffic_sign","had_object_wall","had_object_overhead_crossing",
           "had_object_bus_stop"
         ]
         this.typeList=typeList
        // typeList=["had_link","had_lane_link"]
+       //  typeList=["had_object_arrow"]
         meshList.map(v => {
           typeList.map(v2 =>{
             _this.queryMeshDataByID(v,v2,_this.parseObjData)
