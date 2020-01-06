@@ -1,3 +1,7 @@
+![image](https://github.com/a873054267/vueCesiumDemo/blob/master/static/d1.png)
+![image](https://github.com/a873054267/vueCesiumDemo/blob/master/static/d2.png)
+
+
 # vuecesium
 
 > A Vue.js project
@@ -8,7 +12,7 @@
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# serve with hot reload at localhost:8082
 npm run dev
 
 # build for production with minification
